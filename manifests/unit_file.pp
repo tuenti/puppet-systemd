@@ -88,8 +88,7 @@ define systemd::unit_file(
       ensure    => $active,
       enable    => $enable,
       provider  => 'systemd',
-      subscribe => File["${path}/${name}"],
-      require   => Class['systemd::systemctl::daemon_reload'],
+      subscribe => [File["${path}/${name}"], Class['systemd::systemctl::daemon_reload']],
     }
   }
 }
